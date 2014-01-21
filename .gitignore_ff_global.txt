@@ -12,5 +12,5 @@
 *.rar
 *.tar
 *.zip
-*/bin/*
-*/obj/*
+bin/
+obj/
