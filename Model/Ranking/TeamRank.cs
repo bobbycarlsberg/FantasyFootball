@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FantasyFootball.Model;
 
-namespace FantasyFootball
+namespace FantasyFootball.Ranking
 {
     public class TeamRank
     {

@@ -1,0 +1,10 @@
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\Model\bin\Debug\Model.dll
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\Model\bin\Debug\Model.pdb
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\Model\bin\Debug\ExcelLibrary.dll
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\Model\bin\Debug\LinqToExcel.dll
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\Model\bin\Debug\Remotion.Data.Linq.dll
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\Model\bin\Debug\log4net.dll
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\Model\bin\Debug\LinqToExcel.xml
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\Model\obj\Debug\Model.dll
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\Model\obj\Debug\Model.pdb

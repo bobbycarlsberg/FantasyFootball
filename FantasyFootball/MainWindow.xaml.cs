@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FantasyFootball.Model;
 using FantasyFootball;
+using FantasyFootball.Ranking;
 
 namespace FantasyFootball
 {

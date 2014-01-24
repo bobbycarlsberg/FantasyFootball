@@ -50,10 +50,12 @@
   <ItemGroup>
     <Compile Include="Model\FFTeam.cs" />
     <Compile Include="Model\MatchDetail.cs" />
-    <Compile Include="Model\MatchPlayerPrediction.cs" />
-    <Compile Include="PlayerRank.cs" />
-    <Compile Include="TeamRank.cs" />
-    <Compile Include="RankController.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\MatchPlayerPrediction.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\IMatchDetails.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\MinutesPlayedPredictor.cs" />
+    <Compile Include="Ranking\PlayerRank.cs" />
+    <Compile Include="Ranking\TeamRank.cs" />
+    <Compile Include="Ranking\RankController.cs" />
     <Compile Include="ModelController.cs" />
     <Compile Include="Model\Fixture.cs" />
     <Compile Include="Model\GameWeek.cs" />
@@ -61,13 +63,6 @@
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Team.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Data\Fixtures.xlsx" />
-    <None Include="Data\Gameweeks.xlsx" />
-    <None Include="Data\MatchesPlayed.xlsx" />
-    <None Include="Data\Players.xls" />
-    <None Include="Data\Teams.xlsx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

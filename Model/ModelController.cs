@@ -188,7 +188,7 @@ namespace FantasyFootball
                     if (list[i][1].Value != null)
                         int.TryParse(list[i][1].Value.ToString(), out minutes);
 
-                    if (minutes > 0)
+                    if (minutes >= 0)
                     {
                         var mpd = new MatchPlayerDetails(player, currentMatch);
 

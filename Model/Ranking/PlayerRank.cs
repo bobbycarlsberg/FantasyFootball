@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FantasyFootball.Model;
 
-namespace FantasyFootball
+namespace FantasyFootball.Ranking
 {
     public class PlayerRank
     {
@@ -25,7 +25,7 @@ namespace FantasyFootball
 
             if (awayGames.Any())
             {
-                var awaypointsarray = awayGames.Where(x => x.MP >= 60).Select(x => (double)x.TP - 2).Concat(awayGames.Where(x => x.MP < 60).Select(x => (double)x.TP - 1));
+                var awaypointsarray = awayGames.Where(x => x.MP >= 60).Select(x => (double)x.TP - 2).Concat(awayGames.Where(x => x.MP < 60 && x.MP > 0).Select(x => (double)x.TP - 1));
                 AwayPoints = awaypointsarray.Sum(x => (int)x);
 
                 awayPointsSD = RankController.CalculateStdDev(awaypointsarray);

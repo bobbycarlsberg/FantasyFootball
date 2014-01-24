@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FantasyFootball.Ranking;
+using FantasyFootball.Ranking.MatchDetailsPredictors;
 
 namespace FantasyFootball.Model
 {
@@ -92,6 +94,13 @@ namespace FantasyFootball.Model
             set { player = value; }
         }
 
+        private List<IMatchDetails> matchDetails;
+        public List<IMatchDetails> MatchDetails
+        {
+            get { return matchDetails; }
+            set { matchDetails = value; }
+        } 
+
         private double points;
         public double Points
         {
@@ -101,9 +110,9 @@ namespace FantasyFootball.Model
 
         private double RemoveNegatives(double d)
         {
-            if (d < 0)
-                return 0;
-            else
+            //if (d < 0)
+            //    return 0;
+            //else
                 return d;
         }
     }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FantasyFootball.Model;
 
-namespace FantasyFootball
+namespace FantasyFootball.Ranking
 {
     public class RankController
     {

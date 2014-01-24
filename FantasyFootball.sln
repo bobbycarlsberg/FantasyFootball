@@ -3,30 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FantasyFootball", "FantasyFootball\FantasyFootball.csproj", "{E2603DBF-FBBE-49B1-842D-B985CAB0FDE4}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Scraper", "http://localhost:49321", "{C8A8AB2C-9826-486F-AE76-75AC18ACE50C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{94B02E95-11E1-47B5-99B9-E9B3C3EACBE0}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Scraper", "Scraper\", "{F18368CE-98EE-49C1-A93B-35E87A1B7276}"
 	ProjectSection(WebsiteProperties) = preProject
-		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		ProjectReferences = "{94b02e95-11e1-47b5-99b9-e9b3c3eacbe0}|Model.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_49321"
-		Debug.AspNetCompiler.PhysicalPath = "D:\Websites\Scraper\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49321\"
+		Debug.AspNetCompiler.VirtualPath = "/Scraper"
+		Debug.AspNetCompiler.PhysicalPath = "Scraper\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Scraper\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_49321"
-		Release.AspNetCompiler.PhysicalPath = "D:\Websites\Scraper\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49321\"
+		Release.AspNetCompiler.VirtualPath = "/Scraper"
+		Release.AspNetCompiler.PhysicalPath = "Scraper\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Scraper\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "D:\Websites\Scraper\"
-		DefaultWebSiteLanguage = "Visual C#"
+		VWDPort = "52526"
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{94B02E95-11E1-47B5-99B9-E9B3C3EACBE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,14 +36,14 @@ Global
 		{E2603DBF-FBBE-49B1-842D-B985CAB0FDE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2603DBF-FBBE-49B1-842D-B985CAB0FDE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2603DBF-FBBE-49B1-842D-B985CAB0FDE4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C8A8AB2C-9826-486F-AE76-75AC18ACE50C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8A8AB2C-9826-486F-AE76-75AC18ACE50C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8A8AB2C-9826-486F-AE76-75AC18ACE50C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8A8AB2C-9826-486F-AE76-75AC18ACE50C}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{94B02E95-11E1-47B5-99B9-E9B3C3EACBE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{94B02E95-11E1-47B5-99B9-E9B3C3EACBE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94B02E95-11E1-47B5-99B9-E9B3C3EACBE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94B02E95-11E1-47B5-99B9-E9B3C3EACBE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F18368CE-98EE-49C1-A93B-35E87A1B7276}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F18368CE-98EE-49C1-A93B-35E87A1B7276}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F18368CE-98EE-49C1-A93B-35E87A1B7276}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{F18368CE-98EE-49C1-A93B-35E87A1B7276}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
