@@ -13,7 +13,8 @@ namespace FantasyFootball.Ranking.MatchDetailsForm
         {
             this.name = name;
             MatchDetails = matchDetails.Where(x => x.Name == Name).ToList();
-            average = MatchDetails.Sum(x => double.Parse(x.Value.ToString())) / MatchDetails.Count;
+            total = MatchDetails.Sum(x => int.Parse(x.Value.ToString()));
+            average = (double)total / MatchDetails.Count;
             standardDeviation = RankController.CalculateStdDev(MatchDetails.Select(x => double.Parse(x.Value.ToString())));
         }
 
@@ -43,6 +44,13 @@ namespace FantasyFootball.Ranking.MatchDetailsForm
         {
             get { return standardDeviation; }
             set { standardDeviation = value; }
+        }
+
+        private int total;
+        public int Total
+        {
+            get { return total; }
+            set { total = value; }
         }
     }
 }

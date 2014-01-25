@@ -67,6 +67,20 @@ namespace FantasyFootball.Ranking
             get { return homeFwdTeamAverages; }
             set { homeFwdTeamAverages = value; }
         }
+
+        private List<MatchDetailForm> homeTeamAverages;
+        public List<MatchDetailForm> HomeTeamAverages
+        {
+            get { return homeTeamAverages; }
+            set { homeTeamAverages = value; }
+        }
+
+        private List<MatchDetailForm> awayTeamAverages;
+        public List<MatchDetailForm> AwayTeamAverages
+        {
+            get { return awayTeamAverages; }
+            set { awayTeamAverages = value; }
+        }
         
         private List<PlayerRank> playerRanks;
         public List<PlayerRank> PlayerRanks
@@ -100,13 +114,18 @@ namespace FantasyFootball.Ranking
             homeMidTeamAverages = new List<MatchDetailForm>();
             homeFwdTeamAverages = new List<MatchDetailForm>();
 
+            awayTeamAverages = new List<MatchDetailForm>();
+            homeTeamAverages = new List<MatchDetailForm>();
+
             for (var i = 1; i < (int)MatchDetailName.TP; i++)
             {
+                awayTeamAverages.Add(new MatchDetailForm((MatchDetailName)i, TeamRanks.SelectMany(x => x.AwayMatchDetailForms.SelectMany(y => y.MatchDetails))));
                 awayGKTeamAverages.Add(new MatchDetailForm((MatchDetailName)i, TeamRanks.SelectMany(x => x.AwayGKMatchDetailForms.SelectMany(y => y.MatchDetails))));
                 awayDefTeamAverages.Add(new MatchDetailForm((MatchDetailName)i, TeamRanks.SelectMany(x => x.AwayDefMatchDetailForms.SelectMany(y => y.MatchDetails))));
                 awayMidTeamAverages.Add(new MatchDetailForm((MatchDetailName)i, TeamRanks.SelectMany(x => x.AwayMidMatchDetailForms.SelectMany(y => y.MatchDetails))));
                 awayFwdTeamAverages.Add(new MatchDetailForm((MatchDetailName)i, TeamRanks.SelectMany(x => x.AwayFwdMatchDetailForms.SelectMany(y => y.MatchDetails))));
 
+                homeTeamAverages.Add(new MatchDetailForm((MatchDetailName)i, TeamRanks.SelectMany(x => x.HomeMatchDetailForms.SelectMany(y => y.MatchDetails))));
                 homeGKTeamAverages.Add(new MatchDetailForm((MatchDetailName)i, TeamRanks.SelectMany(x => x.HomeGKMatchDetailForms.SelectMany(y => y.MatchDetails))));
                 homeDefTeamAverages.Add(new MatchDetailForm((MatchDetailName)i, TeamRanks.SelectMany(x => x.HomeDefMatchDetailForms.SelectMany(y => y.MatchDetails))));
                 homeMidTeamAverages.Add(new MatchDetailForm((MatchDetailName)i, TeamRanks.SelectMany(x => x.HomeMidMatchDetailForms.SelectMany(y => y.MatchDetails))));

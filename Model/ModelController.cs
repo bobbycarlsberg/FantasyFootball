@@ -122,21 +122,6 @@ namespace FantasyFootball
                         new MatchDetail((MatchDetailName)13, row[13].Cast<object>()),
                         new MatchDetail((MatchDetailName)14, row[14].Cast<object>()),
                         new MatchDetail((MatchDetailName)15, row[15].Cast<object>())
-                    //MP = row[1].Cast<string>(),
-                    //GS = row[2].Cast<string>(),
-                    //A = row[3].Cast<string>(),
-                    //CS = row[4].Cast<string>(),
-                    //GC = row[5].Cast<string>(),
-                    //OG = row[6].Cast<string>(),
-                    //PS = row[7].Cast<string>(),
-                    //PM = row[8].Cast<string>(),
-                    //YC = row[9].Cast<string>(),
-                    //RC = row[10].Cast<string>(),
-                    //S = row[11].Cast<string>(),
-                    //B = row[12].Cast<string>(),
-                    //ESP = row[13].Cast<string>(),
-                    //BPS = row[14].Cast<string>(),
-                    //TP = row[15].Cast<string>(),
                 }
                 select item;
 

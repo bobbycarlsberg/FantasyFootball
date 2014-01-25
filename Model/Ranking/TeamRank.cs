@@ -21,6 +21,9 @@ namespace FantasyFootball.Ranking
             HomeDefMatchDetailForms = new List<MatchDetailForm>();
             HomeMidMatchDetailForms = new List<MatchDetailForm>();
             HomeFwdMatchDetailForms = new List<MatchDetailForm>();
+
+            homeMatchDetailForms = new List<MatchDetailForm>();
+            awayMatchDetailForms = new List<MatchDetailForm>();
         }
 
         public Team Team { get; set; }
@@ -81,30 +84,77 @@ namespace FantasyFootball.Ranking
             set { homeFwdMatchDetailForms = value; }
         }
 
+        private List<MatchDetailForm> homeMatchDetailForms;
+        public List<MatchDetailForm> HomeMatchDetailForms
+        {
+            get { return homeMatchDetailForms; }
+            set { homeMatchDetailForms = value; }
+        }
+
+        private List<MatchDetailForm> awayMatchDetailForms;
+        public List<MatchDetailForm> AwayMatchDetailForms
+        {
+            get { return awayMatchDetailForms; }
+            set { awayMatchDetailForms = value; }
+        } 
+
+        public double GKHomePoints { get; set; }
+        public double DefHomePoints { get; set; }
+        public double MidHomePoints { get; set; }
+        public double FwdHomePoints { get; set; }
+
+        public double GKAwayPoints { get; set; }
+        public double DefAwayPoints { get; set; }
+        public double MidAwayPoints { get; set; }
+        public double FwdAwayPoints { get; set; }
+
         public void SetPoints(int gameWeek, int form)
         {
-            var details = Team.Fixtures.Where(y => y.GameWeek.No <= gameWeek && y.GameWeek.No > gameWeek - form).SelectMany(x => x.MatchPlayerDetails).ToList();
+            var details = Team.Fixtures
+                .Where(y => y.GameWeek.No <= gameWeek && y.GameWeek.No > gameWeek - form)
+                .SelectMany(x => x.MatchPlayerDetails)
+                .Where(x => x.MatchDetails.Any(z => z.Name == MatchDetailName.MP && int.Parse(z.Value.ToString()) > 0)).ToList();
 
             var homeDetails =
                 details.Where(x => x.Match.HomeTeam == Team && x.Player.Team != Team).ToList();
             var awayDetails =
                 details.Where(x => x.Match.AwayTeam == Team && x.Player.Team != Team).ToList();
 
-            for (var i = 1; i < (int)MatchDetailName.TP; i++)
+            for (var i = 1; i <= (int)MatchDetailName.TP; i++)
             {
                 awayGKMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, homeDetails.Where(x => x.Player.IsGoalKeeper).SelectMany(x => x.MatchDetails)));
                 awayDefMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, homeDetails.Where(x => x.Player.IsDefensive).SelectMany(x => x.MatchDetails)));
                 awayMidMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, homeDetails.Where(x => x.Player.IsMidfield).SelectMany(x => x.MatchDetails)));
                 awayFwdMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, homeDetails.Where(x => x.Player.IsAttack).SelectMany(x => x.MatchDetails)));
+                awayMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, homeDetails.SelectMany(x => x.MatchDetails)));
             }
 
-            for (var i = 1; i < (int)MatchDetailName.TP; i++)
+            for (var i = 1; i <= (int)MatchDetailName.TP; i++)
             {
                 homeGKMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, awayDetails.Where(x => x.Player.IsGoalKeeper).SelectMany(x => x.MatchDetails)));
                 homeDefMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, awayDetails.Where(x => x.Player.IsDefensive).SelectMany(x => x.MatchDetails)));
                 homeMidMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, awayDetails.Where(x => x.Player.IsMidfield).SelectMany(x => x.MatchDetails)));
                 homeFwdMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, awayDetails.Where(x => x.Player.IsAttack).SelectMany(x => x.MatchDetails)));
+                homeMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, awayDetails.SelectMany(x => x.MatchDetails)));
             }
+
+            matches = details.Select(x => x.Match.GameWeek.No).Distinct().Count();
+
+            GKAwayPoints = (double)awayGKMatchDetailForms.Where(x => x.Name == MatchDetailName.TP).Sum(x => x.Total) / awayGKMatchDetailForms.FirstOrDefault(x => x.Name == MatchDetailName.TP).MatchDetails.Count;
+            DefAwayPoints = (double)awayDefMatchDetailForms.Where(x => x.Name == MatchDetailName.TP).Sum(x => x.Total) / awayDefMatchDetailForms.FirstOrDefault(x => x.Name == MatchDetailName.TP).MatchDetails.Count;
+            MidAwayPoints = (double)awayMidMatchDetailForms.Where(x => x.Name == MatchDetailName.TP).Sum(x => x.Total) / awayMidMatchDetailForms.FirstOrDefault(x => x.Name == MatchDetailName.TP).MatchDetails.Count;
+            FwdAwayPoints = (double)awayFwdMatchDetailForms.Where(x => x.Name == MatchDetailName.TP).Sum(x => x.Total) / awayFwdMatchDetailForms.FirstOrDefault(x => x.Name == MatchDetailName.TP).MatchDetails.Count;
+
+            GKHomePoints = (double)homeGKMatchDetailForms.Where(x => x.Name == MatchDetailName.TP).Sum(x => x.Total) / homeGKMatchDetailForms.FirstOrDefault(x => x.Name == MatchDetailName.TP).MatchDetails.Count;
+            DefHomePoints = (double)homeDefMatchDetailForms.Where(x => x.Name == MatchDetailName.TP).Sum(x => x.Total) / homeDefMatchDetailForms.FirstOrDefault(x => x.Name == MatchDetailName.TP).MatchDetails.Count;
+            MidHomePoints = (double)homeMidMatchDetailForms.Where(x => x.Name == MatchDetailName.TP).Sum(x => x.Total) / homeMidMatchDetailForms.FirstOrDefault(x => x.Name == MatchDetailName.TP).MatchDetails.Count;
+            FwdHomePoints = (double)homeFwdMatchDetailForms.Where(x => x.Name == MatchDetailName.TP).Sum(x => x.Total) / homeFwdMatchDetailForms.FirstOrDefault(x => x.Name == MatchDetailName.TP).MatchDetails.Count;
+        }
+
+        private int matches;
+        public int Matches
+        {
+            get { return matches; }
         }
     }
 }

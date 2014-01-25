@@ -8,7 +8,7 @@ using FantasyFootball.Ranking.MatchDetailsForm;
 
 namespace FantasyFootball.Ranking.MatchDetailsPredictors
 {
-    public class YellowCardPredictor : IMatchDetailPredictor
+    public class TotalPointsPredictor : IMatchDetailPredictor
     {
         private double prediction;
         public double Prediction
@@ -27,7 +27,7 @@ namespace FantasyFootball.Ranking.MatchDetailsPredictors
         {
             var average = playerMatchDetailForms.FirstOrDefault(x => x.Name == name).Average;
 
-            prediction = average * -1;
+            prediction = average;
         }
     }
 }

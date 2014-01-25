@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using FantasyFootball.Model;
 using FantasyFootball;
 using FantasyFootball.Ranking;
+using FantasyFootball.Ranking.MatchDetailsForm;
 
 namespace FantasyFootball
 {
@@ -25,6 +26,7 @@ namespace FantasyFootball
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public ModelController ModelController;
+
         private RankController rankController;
         public RankController RankController
         {
@@ -35,6 +37,20 @@ namespace FantasyFootball
                 if (this.PropertyChanged != null)
                 {
                     this.PropertyChanged(this, new PropertyChangedEventArgs("RankController"));
+                }
+            }
+        }
+
+        private MatchDetailForm selectedMatchDetailForm;
+        public MatchDetailForm SelectedMatchDetailForm
+        {
+            get { return selectedMatchDetailForm; }
+            set
+            {
+                selectedMatchDetailForm = value;
+                if (this.PropertyChanged != null)
+                {
+                    this.PropertyChanged(this, new PropertyChangedEventArgs("SelectedMatchDetailForm"));
                 }
             }
         }
@@ -109,6 +125,20 @@ namespace FantasyFootball
             }
         }
 
+        private MatchPlayerPrediction selectedPrediction;
+        public MatchPlayerPrediction SelectedPrediction
+        {
+            get { return selectedPrediction; }
+            set
+            {
+                selectedPrediction = value;
+                if (this.PropertyChanged != null)
+                {
+                    this.PropertyChanged(this, new PropertyChangedEventArgs("SelectedPrediction"));
+                }
+            }
+        }
+
         private List<PlayerRank> playerRanks;
         public List<PlayerRank> PlayerRanks
         {
@@ -133,6 +163,20 @@ namespace FantasyFootball
                 if (this.PropertyChanged != null)
                 {
                     this.PropertyChanged(this, new PropertyChangedEventArgs("PlayerRank"));
+                }
+            }
+        }
+
+        private TeamRank teamRank;
+        public TeamRank TeamRank
+        {
+            get { return teamRank; }
+            set
+            {
+                teamRank = value;
+                if (this.PropertyChanged != null)
+                {
+                    this.PropertyChanged(this, new PropertyChangedEventArgs("TeamRank"));
                 }
             }
         }

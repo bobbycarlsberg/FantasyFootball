@@ -25,12 +25,8 @@ namespace FantasyFootball.Ranking.MatchDetailsPredictors
 
         public void SetPoints(RankController rankController, TeamRank teamRank, List<MatchDetailForm> teamMatchDetailForms, PlayerRank playerRank, List<MatchDetailForm> playerMatchDetailForms)
         {
-
-            var average = playerMatchDetailForms.FirstOrDefault(x => x.Name == name).Average;
-            var teamAverage = teamMatchDetailForms.FirstOrDefault(x => x.Name == name).Average;
-
-            average += teamAverage;
-            average /= 2;
+            var average = MatchPlayerPrediction.SDProportionate(rankController, teamMatchDetailForms,
+                                                                playerMatchDetailForms, name);
 
             prediction = average * 3;
         }

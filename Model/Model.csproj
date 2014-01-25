@@ -53,6 +53,7 @@
     <Compile Include="Ranking\MatchDetailsForm\IMatchDetailForm.cs" />
     <Compile Include="Ranking\MatchDetailsForm\MatchDetailForm.cs" />
     <Compile Include="Ranking\MatchDetailsPredictors\CleanSheetPredictor.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\TotalPointsPredictor.cs" />
     <Compile Include="Ranking\MatchDetailsPredictors\GoalsConcededPredictor.cs" />
     <Compile Include="Ranking\MatchDetailsPredictors\BonusPredictor.cs" />
     <Compile Include="Ranking\MatchDetailsPredictors\SavesPredictor.cs" />

@@ -28,12 +28,12 @@ namespace FantasyFootball.Ranking
                 Player.MatchPlayerDetails.Where(
                     x => x.Match.GameWeek.No >= gameWeek - form && x.Match.HomeTeam == Player.Team).ToList();
 
-            for (var i = 1; i < (int)MatchDetailName.TP; i++)
+            for (var i = 1; i <= (int)MatchDetailName.TP; i++)
             {
                 awayMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, awayGames.SelectMany(x => x.MatchDetails)));
             }
 
-            for (var i = 1; i < (int)MatchDetailName.TP; i++)
+            for (var i = 1; i <= (int)MatchDetailName.TP; i++)
             {
                 homeMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, homeGames.SelectMany(x => x.MatchDetails)));
             }
