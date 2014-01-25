@@ -8,7 +8,7 @@ using FantasyFootball.Ranking.MatchDetailsForm;
 
 namespace FantasyFootball.Ranking.MatchDetailsPredictors
 {
-    public class MinutesPlayedPredictor : IMatchDetailPredictor
+    public class GoalsScoredPredictor : IMatchDetailPredictor
     {
         private double prediction;
         public double Prediction
@@ -17,7 +17,7 @@ namespace FantasyFootball.Ranking.MatchDetailsPredictors
             set { prediction = value; }
         }
 
-        private MatchDetailName name = MatchDetailName.MP;
+        private MatchDetailName name = MatchDetailName.GS;
         public MatchDetailName Name
         {
             get { return name; }
@@ -26,7 +26,17 @@ namespace FantasyFootball.Ranking.MatchDetailsPredictors
         public void SetPoints(RankController rankController, TeamRank teamRank, List<MatchDetailForm> teamMatchDetailForms, PlayerRank playerRank, List<MatchDetailForm> playerMatchDetailForms)
         {
             var average = playerMatchDetailForms.FirstOrDefault(x => x.Name == name).Average;
-            prediction = average >= 60 ? 2 : average > 0 ? 1 : 0;
+            var teamAverage = teamMatchDetailForms.FirstOrDefault(x => x.Name == name).Average;
+
+            average += teamAverage;
+            average /= 2;
+
+            if (playerRank.Player.IsGoalKeeper || playerRank.Player.IsDefensive)
+                prediction = average * 6;
+            else if (playerRank.Player.IsMidfield)
+                prediction = average * 5;
+            else if (playerRank.Player.IsAttack)
+                prediction = average * 4;
         }
     }
 }
