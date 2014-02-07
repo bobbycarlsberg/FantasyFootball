@@ -41,6 +41,22 @@ namespace FantasyFootball
             }
         }
 
+        private MatchDetailName selectedAttribute = MatchDetailName.TP;
+        public MatchDetailName SelectedAttribute
+        {
+            get { return selectedAttribute; }
+            set
+            {
+                selectedAttribute = value;
+                TeamRanks = RankController.RankTeams(ModelController.Teams, formLength, currentGameWeek, FutureFixtures,
+                                         selectedAttribute);
+                if (this.PropertyChanged != null)
+                {
+                    this.PropertyChanged(this, new PropertyChangedEventArgs("SelectedAttribute"));
+                }
+            }
+        }
+
         private MatchDetailForm selectedMatchDetailForm;
         public MatchDetailForm SelectedMatchDetailForm
         {
@@ -207,7 +223,7 @@ namespace FantasyFootball
             CurrentGameWeek = GameWeek.GetGameWeek(ModelController.GameWeeks, DateTime.Today).No;
 
 
-            TeamRanks = RankController.RankTeams(ModelController.Teams, formLength, currentGameWeek, futureFixtures).ToList();
+            TeamRanks = RankController.RankTeams(ModelController.Teams, formLength, currentGameWeek, futureFixtures, selectedAttribute).ToList();
             PlayerRanks = RankController.RankPlayers(ModelController.Players, formLength, currentGameWeek, futureFixtures, "").ToList();
         }
 
@@ -233,7 +249,7 @@ namespace FantasyFootball
 
         private void teams_OnClick(object sender, RoutedEventArgs e)
         {
-            TeamRanks = RankController.RankTeams(ModelController.Teams, formLength, currentGameWeek, futureFixtures).ToList();
+            TeamRanks = RankController.RankTeams(ModelController.Teams, formLength, currentGameWeek, futureFixtures, selectedAttribute).ToList();
         }
 
         private void Price_OnClick(object sender, RoutedEventArgs e)
@@ -251,6 +267,14 @@ namespace FantasyFootball
 
                 PlayerRanks = Squad.Team;
             }
+
+            var team = new FFTeam();
+           // team.Squad.Add(ModelController.Players.FirstOrDefault(x => x.Name == "Szezesny"));
+        }
+
+        private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            TeamAttributeComboBox.ItemsSource = Enum.GetValues(typeof (MatchDetailName)).Cast<MatchDetailName>();
         }
     }
 }

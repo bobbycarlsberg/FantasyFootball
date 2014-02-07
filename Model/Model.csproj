@@ -48,27 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\FFTeam.cs" />
     <Compile Include="Model\MatchDetail.cs" />
-    <Compile Include="Ranking\MatchDetailsForm\IMatchDetailForm.cs" />
-    <Compile Include="Ranking\MatchDetailsForm\MatchDetailForm.cs" />
-    <Compile Include="Ranking\MatchDetailsPredictors\CleanSheetPredictor.cs" />
-    <Compile Include="Ranking\MatchDetailsPredictors\TotalPointsPredictor.cs" />
-    <Compile Include="Ranking\MatchDetailsPredictors\GoalsConcededPredictor.cs" />
-    <Compile Include="Ranking\MatchDetailsPredictors\BonusPredictor.cs" />
-    <Compile Include="Ranking\MatchDetailsPredictors\SavesPredictor.cs" />
-    <Compile Include="Ranking\MatchDetailsPredictors\RedCardPredictor.cs" />
-    <Compile Include="Ranking\MatchDetailsPredictors\YellowCardPredictor.cs" />
-    <Compile Include="Ranking\MatchDetailsPredictors\OwnGoalPredictor.cs" />
-    <Compile Include="Ranking\MatchDetailsPredictors\AssistPredictor.cs" />
-    <Compile Include="Ranking\MatchDetailsPredictors\GoalsScoredPredictor.cs" />
-    <Compile Include="Ranking\MatchDetailsPredictors\MatchPlayerPrediction.cs" />
-    <Compile Include="Ranking\MatchDetailsPredictors\IMatchDetailsPredictor.cs" />
-    <Compile Include="Ranking\MatchDetailsPredictors\MinutesPlayedPredictor.cs" />
-    <Compile Include="Ranking\PlayerRank.cs" />
-    <Compile Include="Ranking\TeamRank.cs" />
-    <Compile Include="Ranking\RankController.cs" />
-    <Compile Include="ModelController.cs" />
+    <Compile Include="Model\ModelController.cs" />
     <Compile Include="Model\Fixture.cs" />
     <Compile Include="Model\GameWeek.cs" />
     <Compile Include="Model\MatchPlayerDetails.cs" />

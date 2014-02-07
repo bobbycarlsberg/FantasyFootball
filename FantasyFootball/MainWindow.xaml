@@ -1,7 +1,18 @@
 ﻿<Window x:Class="FantasyFootball.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" WindowState="Maximized" x:Name="DatagridWindow">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:fantasyFootball="clr-namespace:FantasyFootball;assembly=Model"
+        Title="MainWindow" WindowState="Maximized" x:Name="DatagridWindow" Loaded="MainWindow_OnLoaded">
+
+    <Window.Resources>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
+                            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="fantasyFootball:MatchDetailName"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -39,10 +50,13 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
+
+                <ComboBox x:Name="TeamAttributeComboBox" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding SelectedAttribute, ElementName=DatagridWindow}" />
                 
-                <DataGrid ItemsSource="{Binding TeamRanks, ElementName=DatagridWindow}" SelectedItem="{Binding TeamRank, ElementName=DatagridWindow}" AutoGenerateColumns="False">
+                <DataGrid Grid.Row="1" ItemsSource="{Binding TeamRanks, ElementName=DatagridWindow}" SelectedItem="{Binding TeamRank, ElementName=DatagridWindow}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Team" Binding="{Binding Team.LongName}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Matches" Binding="{Binding Team.MatchCount}"></DataGridTextColumn>
@@ -57,7 +71,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <DataGrid Grid.Row="1" ItemsSource="{Binding SelectedMatchDetailForm.MatchDetails, ElementName=DatagridWindow}" AutoGenerateColumns="False">
+                <DataGrid Grid.Row="2" ItemsSource="{Binding SelectedMatchDetailForm.MatchDetails, ElementName=DatagridWindow}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Selected Match Details" Binding="{Binding Name}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Total" Binding="{Binding Value}"></DataGridTextColumn>
@@ -206,7 +220,7 @@
 
                 <DataGrid VerticalScrollBarVisibility="Auto" ItemsSource="{Binding PlayerRank.HomeMatchDetailForms, ElementName=DatagridWindow}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Attribute" Binding="{Binding Name}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Home" Binding="{Binding Name}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Games" Binding="{Binding MatchDetails.Count}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Average" Binding="{Binding Average, StringFormat=N2}"></DataGridTextColumn>
                         <DataGridTextColumn Header="StandardDeviation" Binding="{Binding StandardDeviation, StringFormat=N2}"></DataGridTextColumn>
@@ -216,7 +230,7 @@
 
                 <DataGrid VerticalScrollBarVisibility="Auto" ItemsSource="{Binding PlayerRank.AwayMatchDetailForms, ElementName=DatagridWindow}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Attribute" Binding="{Binding Name}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Away" Binding="{Binding Name}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Games" Binding="{Binding MatchDetails.Count}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Average" Binding="{Binding Average, StringFormat=N2}"></DataGridTextColumn>
                         <DataGridTextColumn Header="StandardDeviation" Binding="{Binding StandardDeviation, StringFormat=N2}"></DataGridTextColumn>

@@ -36,7 +36,7 @@ namespace FantasyFootball.Model
 
         public int TotalPoints
         {
-            get { return MatchPlayerDetails.Sum(x => x.TP); }
+            get { return MatchPlayerDetails.Sum(x => x.MatchDetails.Where(y => y.Name == MatchDetailName.TP).Sum(y => (int)y.Value)); }
         }
 
         public bool IsGoalKeeper
