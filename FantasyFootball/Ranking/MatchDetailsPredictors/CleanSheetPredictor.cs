@@ -30,7 +30,7 @@ namespace FantasyFootball.Ranking.MatchDetailsPredictors
 
             if (playerRank.Player.IsGoalKeeper)
                 prediction = average * 4;
-            else if (playerRank.Player.IsDefensive)
+            else if (playerRank.Player.IsDefender)
                 prediction = average * 4;
             else if (playerRank.Player.IsMidfield)
                 prediction = average;

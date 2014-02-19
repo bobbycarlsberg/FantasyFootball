@@ -44,9 +44,9 @@ namespace FantasyFootball.Model
             get { return Position == "GKP"; }
         }
 
-        public bool IsDefensive
+        public bool IsDefender
         {
-            get { return Position == "DEF" || Position == "GK"; }
+            get { return Position == "DEF"; }
         }
 
         public bool IsMidfield

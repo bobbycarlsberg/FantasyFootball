@@ -48,12 +48,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\PlayerRankBase.cs" />
+    <Compile Include="Model\FFTeam.cs" />
+    <Compile Include="Model\Interfaces\IRankController.cs" />
+    <Compile Include="Model\Interfaces\IMatchPlayerPrediction.cs" />
+    <Compile Include="Model\Interfaces\IPlayerRank.cs" />
+    <Compile Include="Model\Interfaces\ITeamRank.cs" />
     <Compile Include="Model\MatchDetail.cs" />
     <Compile Include="Model\ModelController.cs" />
     <Compile Include="Model\Fixture.cs" />
     <Compile Include="Model\GameWeek.cs" />
     <Compile Include="Model\MatchPlayerDetails.cs" />
     <Compile Include="Model\Player.cs" />
+    <Compile Include="Model\PlayerComparison.cs" />
+    <Compile Include="Model\RankControllerBase.cs" />
     <Compile Include="Model\Team.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

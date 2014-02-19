@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FantasyFootball.Ranking;
 
 namespace FantasyFootball.Model
 {
@@ -12,13 +11,13 @@ namespace FantasyFootball.Model
     {
         public FFTeam()
         {
-            squad = new ObservableCollection<PlayerRank>();
-            team = new List<PlayerRank>();
-            substitutes = new List<PlayerRank>();
-            goalies = new List<PlayerRank>();
-            defenders = new List<PlayerRank>();
-            midfielders = new List<PlayerRank>();
-            forwards = new List<PlayerRank>();
+            squad = new ObservableCollection<IPlayerRank>();
+            team = new List<IPlayerRank>();
+            substitutes = new List<IPlayerRank>();
+            goalies = new List<IPlayerRank>();
+            defenders = new List<IPlayerRank>();
+            midfielders = new List<IPlayerRank>();
+            forwards = new List<IPlayerRank>();
 
             squad.CollectionChanged += squad_CollectionChanged;
         }
@@ -29,12 +28,11 @@ namespace FantasyFootball.Model
             {
                 foreach (var z in e.NewItems)
                 {
-                    var playerRank = (PlayerRank)z;
+                    var playerRank = (IPlayerRank)z;
                     if (playerRank != null)
                     {
                         var gCount = team.Count(x => x.Player.IsGoalKeeper);
-                        var dCount = team.Count(x => x.Player.IsDefensive);
-                        var mCount = team.Count(x => x.Player.IsMidfield);
+                        var dCount = team.Count(x => x.Player.IsDefender);
                         var fCount = team.Count(x => x.Player.IsAttack);
 
                         var spaceNeeded = 5 - gCount - (fCount > 0 ? 1 : 0) - (dCount > 2 ? 3 : dCount);
@@ -50,16 +48,16 @@ namespace FantasyFootball.Model
                                     substitutes.Add(playerRank);
                             }
                         }
-                        else if (playerRank.Player.IsDefensive)
+                        else if (playerRank.Player.IsDefender)
                         {
                             if (defenders.Count < 5)
                             {
                                 defenders.Add(playerRank);
 
                                 if (team.Count < 11 - spaceNeeded)
-                                    team.Insert(team.Count(x => x.Player.IsGoalKeeper) + team.Count(x => x.Player.IsDefensive), playerRank);
+                                    team.Insert(team.Count(x => x.Player.IsGoalKeeper) + team.Count(x => x.Player.IsDefender), playerRank);
                                 else if (dCount < 3)
-                                    team.Insert(team.Count(x => x.Player.IsGoalKeeper) + team.Count(x => x.Player.IsDefensive), playerRank);
+                                    team.Insert(team.Count(x => x.Player.IsGoalKeeper) + team.Count(x => x.Player.IsDefender), playerRank);
                                 else
                                     substitutes.Add(playerRank);
                             }
@@ -70,7 +68,7 @@ namespace FantasyFootball.Model
                             {
                                 midfielders.Add(playerRank);
                                 if (team.Count < 11 - spaceNeeded)
-                                    team.Insert(team.Count(x => x.Player.IsGoalKeeper) + team.Count(x => x.Player.IsDefensive) + team.Count(x => x.Player.IsMidfield), playerRank);
+                                    team.Insert(team.Count(x => x.Player.IsGoalKeeper) + team.Count(x => x.Player.IsDefender) + team.Count(x => x.Player.IsMidfield), playerRank);
                                 else
                                     substitutes.Add(playerRank);
                             }
@@ -81,9 +79,9 @@ namespace FantasyFootball.Model
                             {
                                 forwards.Add(playerRank);
                                 if (team.Count < 11 - spaceNeeded)
-                                    team.Insert(team.Count(x => x.Player.IsGoalKeeper) + team.Count(x => x.Player.IsDefensive) + team.Count(x => x.Player.IsMidfield) + team.Count(x => x.Player.IsAttack), playerRank);
+                                    team.Insert(team.Count(x => x.Player.IsGoalKeeper) + team.Count(x => x.Player.IsDefender) + team.Count(x => x.Player.IsMidfield) + team.Count(x => x.Player.IsAttack), playerRank);
                                 else if (fCount == 0)
-                                    team.Insert(team.Count(x => x.Player.IsGoalKeeper) + team.Count(x => x.Player.IsDefensive) + team.Count(x => x.Player.IsMidfield) + team.Count(x => x.Player.IsAttack), playerRank);
+                                    team.Insert(team.Count(x => x.Player.IsGoalKeeper) + team.Count(x => x.Player.IsDefender) + team.Count(x => x.Player.IsMidfield) + team.Count(x => x.Player.IsAttack), playerRank);
                                 else
                                     substitutes.Add(playerRank);
                             }
@@ -98,7 +96,7 @@ namespace FantasyFootball.Model
             {
                 foreach (var x in e.OldItems)
                 {
-                    var playerRank = (PlayerRank)x;
+                    var playerRank = (IPlayerRank)x;
 
                     if (playerRank != null)
                     {
@@ -119,34 +117,46 @@ namespace FantasyFootball.Model
                 }
             }
 
+            if (squad.Count == 1)
+            {
+                captain = squad[0];
+            }
+            else if (squad.Count == 2)
+            {
+                viceCaptain = squad[1];
+            }
+
             Cost = squad.Sum(x => x.Player.Price);
         }
 
-        private ObservableCollection<PlayerRank> squad;
-        public ObservableCollection<PlayerRank> Squad
+        private ObservableCollection<IPlayerRank> squad;
+        public ObservableCollection<IPlayerRank> Squad
         {
             get { return squad; }
             set { squad = value; }
         }
 
-        private List<PlayerRank> team;
-        public List<PlayerRank> Team
+        private List<IPlayerRank> team;
+        public List<IPlayerRank> Team
         {
             get { return team; }
             set { team = value; }
         }
 
-        private List<PlayerRank> substitutes;
-        public List<PlayerRank> Substitutes
+        private List<IPlayerRank> substitutes;
+        public List<IPlayerRank> Substitutes
         {
             get { return substitutes; }
             set { substitutes = value; }
         }
 
-        public List<PlayerRank> goalies;
-        public List<PlayerRank> defenders;
-        public List<PlayerRank> midfielders;
-        public List<PlayerRank> forwards;
+        public List<IPlayerRank> goalies;
+        public List<IPlayerRank> defenders;
+        public List<IPlayerRank> midfielders;
+        public List<IPlayerRank> forwards;
+
+        public IPlayerRank captain;
+        public IPlayerRank viceCaptain;
 
         private double cost;
         public double Cost

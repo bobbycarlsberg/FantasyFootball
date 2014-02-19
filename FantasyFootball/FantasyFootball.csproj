@@ -59,7 +59,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Ranking\FFTeam.cs" />
     <Compile Include="Ranking\MatchDetailsForm\MatchDetailForm.cs" />
     <Compile Include="Ranking\MatchDetailsPredictors\AssistPredictor.cs" />
     <Compile Include="Ranking\MatchDetailsPredictors\BonusPredictor.cs" />

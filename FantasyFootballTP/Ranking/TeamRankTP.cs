@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using FantasyFootball;
 using FantasyFootball.Model;
+using FantasyFootball.Model.Interfaces;
 
 namespace FantasyFootballTP.Ranking
 {
-    public class TeamRank
+    public class TeamRankTP : ITeamRank
     {
         public Team Team { get; set; }
 
@@ -72,7 +73,7 @@ namespace FantasyFootballTP.Ranking
         {
             var awayMatches = Team.Fixtures.Where(x => x.AwayTeam == Team && x.GameWeek.No <= gameWeek && x.GameWeek.No >= gameWeek - form);
             var gkps = awayMatches.SelectMany(x => x.MatchPlayerDetails.Where(y => y.Player.IsGoalKeeper && y.Player.Team != Team));
-            var defenders = awayMatches.SelectMany(x => x.MatchPlayerDetails.Where(y => y.Player.IsDefensive && y.Player.Team != Team));
+            var defenders = awayMatches.SelectMany(x => x.MatchPlayerDetails.Where(y => y.Player.IsDefender && y.Player.Team != Team));
             var midfielders = awayMatches.SelectMany(x => x.MatchPlayerDetails.Where(y => y.Player.IsMidfield && y.Player.Team != Team));
             var attackers = awayMatches.SelectMany(x => x.MatchPlayerDetails.Where(y => y.Player.IsAttack && y.Player.Team != Team));
 
@@ -88,7 +89,7 @@ namespace FantasyFootballTP.Ranking
 
             var homeMatches = Team.Fixtures.Where(x => x.HomeTeam == Team && x.GameWeek.No <= gameWeek && x.GameWeek.No >= gameWeek - form);
             gkps = homeMatches.SelectMany(x => x.MatchPlayerDetails.Where(y => y.Player.IsGoalKeeper && y.Player.Team != Team));
-            defenders = homeMatches.SelectMany(x => x.MatchPlayerDetails.Where(y => y.Player.IsDefensive && y.Player.Team != Team));
+            defenders = homeMatches.SelectMany(x => x.MatchPlayerDetails.Where(y => y.Player.IsDefender && y.Player.Team != Team));
             midfielders = homeMatches.SelectMany(x => x.MatchPlayerDetails.Where(y => y.Player.IsMidfield && y.Player.Team != Team));
             attackers = homeMatches.SelectMany(x => x.MatchPlayerDetails.Where(y => y.Player.IsAttack && y.Player.Team != Team));
 
@@ -103,7 +104,7 @@ namespace FantasyFootballTP.Ranking
             avgHomeFWDPoints = Math.Round((double)attackers.Sum(y => int.Parse(y.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.TP).Value.ToString())) / homeFwdMinutes * 90, 5); ;
         }
 
-        public TeamRank(Team team)
+        public TeamRankTP(Team team)
         {
             Team = team;
         }

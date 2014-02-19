@@ -1,3 +1,11 @@
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\MainWindow.baml
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\MainWindow.g.cs
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\App.g.cs
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\FantasyFootball_MarkupCompile.cache
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\FantasyFootball.g.resources
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\FantasyFootball.Properties.Resources.resources
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\FantasyFootball.csproj.GenerateResource.Cache
+C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\FantasyFootball.csprojResolveAssemblyReference.cache
 C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\bin\Debug\FantasyFootball.exe.config
 C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\bin\Debug\FantasyFootball.exe
 C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\bin\Debug\FantasyFootball.pdb
@@ -8,13 +16,5 @@ C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\bin\Debug\Exc
 C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\bin\Debug\log4net.dll
 C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\bin\Debug\Model.pdb
 C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\bin\Debug\LinqToExcel.xml
-C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\FantasyFootball.csprojResolveAssemblyReference.cache
-C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\MainWindow.baml
-C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\MainWindow.g.cs
-C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\App.g.cs
-C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\FantasyFootball_MarkupCompile.cache
-C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\FantasyFootball.g.resources
-C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\FantasyFootball.Properties.Resources.resources
-C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\FantasyFootball.csproj.GenerateResource.Cache
 C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\FantasyFootball.exe
 C:\Users\nicholas\Documents\GitHub\FantasyFootball\FantasyFootball\obj\Debug\FantasyFootball.pdb

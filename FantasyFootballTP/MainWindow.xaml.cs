@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using FantasyFootball;
 using FantasyFootball.Model;
+using FantasyFootball.Model.Interfaces;
 using FantasyFootballTP.Ranking;
 
 namespace FantasyFootballTP
@@ -15,8 +16,8 @@ namespace FantasyFootballTP
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public ModelController ModelController;
-        private RankController rankController;
-        public RankController RankController
+        private RankControllerTP rankController;
+        public RankControllerTP RankController
         {
             get { return rankController; }
             set
@@ -85,8 +86,8 @@ namespace FantasyFootballTP
             }
         }
 
-        private List<TeamRank> teamRanks;
-        public List<TeamRank> TeamRanks
+        private List<ITeamRank> teamRanks;
+        public List<ITeamRank> TeamRanks
         {
             get { return teamRanks; }
             set
@@ -99,8 +100,8 @@ namespace FantasyFootballTP
             }
         }
 
-        private List<PlayerRank> playerRanks;
-        public List<PlayerRank> PlayerRanks
+        private List<IPlayerRank> playerRanks;
+        public List<IPlayerRank> PlayerRanks
         {
             get { return playerRanks; }
             set
@@ -113,8 +114,8 @@ namespace FantasyFootballTP
             }
         }
 
-        private PlayerRank playerRank;
-        public PlayerRank PlayerRank
+        private IPlayerRank playerRank;
+        public IPlayerRank PlayerRank
         {
             get { return playerRank; }
             set
@@ -147,13 +148,13 @@ namespace FantasyFootballTP
         {
             InitializeComponent();
             ModelController = new ModelController();
-            RankController = new RankController();
+            RankController = new RankControllerTP();
             ModelController.LoadPlayers();
             ModelController.LoadPlayerDetails();
             CurrentGameWeek = GameWeek.GetGameWeek(ModelController.GameWeeks, DateTime.Today).No;
 
 
-            TeamRanks = RankController.RankTeams(ModelController.Teams, formLength, currentGameWeek, futureFixtures).ToList();
+            TeamRanks = RankController.RankTeams(ModelController.Teams, formLength, currentGameWeek, futureFixtures, MatchDetailName.TP).ToList();
             PlayerRanks = RankController.RankPlayers(ModelController.Players, formLength, currentGameWeek, futureFixtures, "").ToList();
         }
 
@@ -179,7 +180,7 @@ namespace FantasyFootballTP
 
         private void teams_OnClick(object sender, RoutedEventArgs e)
         {
-            TeamRanks = RankController.RankTeams(ModelController.Teams, formLength, currentGameWeek, futureFixtures).ToList();
+            TeamRanks = RankController.RankTeams(ModelController.Teams, formLength, currentGameWeek, futureFixtures, MatchDetailName.TP).ToList();
         }
 
         private void Price_OnClick(object sender, RoutedEventArgs e)

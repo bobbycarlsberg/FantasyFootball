@@ -8,28 +8,28 @@ using FantasyFootball.Model;
 
 namespace FantasyFootballTP.Ranking
 {
-    public class PlayerRank
+    public class PlayerRankTP : PlayerRankBase
     {
-        public PlayerRank(Player player)
+        public PlayerRankTP(Player player) : base(player)
         {
-            Player = player;
+            
         }
 
         public void SetPoints(int gameWeek, int form, int futureGames)
         {
             var awayGames =
                 Player.MatchPlayerDetails.Where(
-                    x => x.Match.GameWeek.No >= gameWeek - form && x.Match.AwayTeam == Player.Team);
+                    x => x.Match.GameWeek.No >= gameWeek - form && x.Match.GameWeek.No < gameWeek && x.Match.AwayTeam == Player.Team);
             var homeGames =
                 Player.MatchPlayerDetails.Where(
-                    x => x.Match.GameWeek.No >= gameWeek - form && x.Match.HomeTeam == Player.Team);
+                    x => x.Match.GameWeek.No >= gameWeek - form && x.Match.GameWeek.No < gameWeek && x.Match.HomeTeam == Player.Team);
 
             if (awayGames.Any())
             {
                 var awaypointsarray = awayGames.Where(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.MP).Value.ToString()) >= 60).Select(x => double.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.TP).Value.ToString()) - 2).Concat(awayGames.Where(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.MP).Value.ToString()) < 60).Select(x => double.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.TP).Value.ToString()) - 1));
                 AwayPoints = awaypointsarray.Sum(x => (int)x);
 
-                awayPointsSD = RankController.CalculateStdDev(awaypointsarray);
+                awayPointsSD = RankControllerTP.CalculateStdDev(awaypointsarray);
 
                 AwayMinutes = awayGames.Sum(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.MP).Value.ToString()));
 
@@ -41,52 +41,43 @@ namespace FantasyFootballTP.Ranking
                 HomePoints = (homeGames.Where(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.MP).Value.ToString()) >= 60).Sum(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.TP).Value.ToString()) - 2)) +
                              (homeGames.Where(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.MP).Value.ToString()) < 60).Sum(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.TP).Value.ToString()) - 1));
 
-                homePointsSD = RankController.CalculateStdDev(homeGames.Where(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.MP).Value.ToString()) >= 60).Select(x => double.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.TP).Value.ToString()) - 2).Concat(homeGames.Where(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.MP).Value.ToString()) < 60).Select(x => double.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.TP).Value.ToString()) - 1)));
+                homePointsSD = RankControllerTP.CalculateStdDev(homeGames.Where(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.MP).Value.ToString()) >= 60).Select(x => double.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.TP).Value.ToString()) - 2).Concat(homeGames.Where(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.MP).Value.ToString()) < 60).Select(x => double.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.TP).Value.ToString()) - 1)));
 
                 HomeMinutes = homeGames.Sum(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.MP).Value.ToString()));
 
                 HomePointsPerGame = (((double)HomePoints / HomeMinutes) * 90) + 2;
             }
 
-            if (player.MatchPlayerDetails.Any(x => x.Match.GameWeek.No == gameWeek - 0))
-                WillPlay = (double)player.MatchPlayerDetails.Where(x => x.Match.GameWeek.No == gameWeek - 0).Sum(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.MP).Value.ToString())) /
-                           (player.MatchPlayerDetails.Count(x => x.Match.GameWeek.No == gameWeek - 0) * 90) * 0.5;
+            if (Player.MatchPlayerDetails.Any(x => x.Match.GameWeek.No == gameWeek - 0))
+                WillPlay = (double)Player.MatchPlayerDetails.Where(x => x.Match.GameWeek.No == gameWeek - 0).Sum(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.MP).Value.ToString())) /
+                           (Player.MatchPlayerDetails.Count(x => x.Match.GameWeek.No == gameWeek - 0) * 90) * 0.5;
 
-            if (player.MatchPlayerDetails.Any(x => x.Match.GameWeek.No == gameWeek - 1))
-                WillPlay += (double)player.MatchPlayerDetails.Where(x => x.Match.GameWeek.No == gameWeek - 1).Sum(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.MP).Value.ToString())) /
-                           (player.MatchPlayerDetails.Count(x => x.Match.GameWeek.No == gameWeek - 1) * 90) * 0.35;
+            if (Player.MatchPlayerDetails.Any(x => x.Match.GameWeek.No == gameWeek - 1))
+                WillPlay += (double)Player.MatchPlayerDetails.Where(x => x.Match.GameWeek.No == gameWeek - 1).Sum(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.MP).Value.ToString())) /
+                           (Player.MatchPlayerDetails.Count(x => x.Match.GameWeek.No == gameWeek - 1) * 90) * 0.35;
 
-            if (player.MatchPlayerDetails.Any(x => x.Match.GameWeek.No == gameWeek - 2))
-                WillPlay += (double)player.MatchPlayerDetails.Where(x => x.Match.GameWeek.No == gameWeek - 2).Sum(x =>int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.MP).Value.ToString())) /
-                       (player.MatchPlayerDetails.Count(x => x.Match.GameWeek.No == gameWeek - 2) * 90) * 0.15;
+            if (Player.MatchPlayerDetails.Any(x => x.Match.GameWeek.No == gameWeek - 2))
+                WillPlay += (double)Player.MatchPlayerDetails.Where(x => x.Match.GameWeek.No == gameWeek - 2).Sum(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.MP).Value.ToString())) /
+                       (Player.MatchPlayerDetails.Count(x => x.Match.GameWeek.No == gameWeek - 2) * 90) * 0.15;
 
-            WillPlay *= (double)player.Availability / 100;
-
-            if (player.Name == "Agüero")
-                WillPlay = 1;
-
+            WillPlay *= (double)Player.Availability / 100;
+            
             pointsPerPound = ((awayPointsPerGame + homePointsPerGame) / 2) / Player.Price;
 
-            FormFixtures = player.MatchPlayerDetails.Where(x => x.Match.GameWeek.No >= gameWeek - form).ToList();
+            FormFixtures = Player.MatchPlayerDetails.Where(x => x.Match.GameWeek.No >= gameWeek - form).ToList();
 
         }
 
-        public void Predict(int gameWeek, int futureGames, RankController rankController)
+        public void Predict(int gameWeek, int futureGames, RankControllerTP rankController)
         {
             var fixtures =
-                player.Team.Fixtures.Where(x => x.GameWeek.No <= gameWeek + futureGames && x.GameWeek.No > gameWeek);
+                Player.Team.Fixtures.Where(x => x.GameWeek.No <= gameWeek + futureGames && x.GameWeek.No >= gameWeek).ToList();
 
-            Predictions =
-                fixtures.Select(x => new MatchPlayerPrediction(x, this, rankController)).ToList();
+            Predictions = new List<IMatchPlayerPrediction>();
 
-            FuturePoints = predictions.Sum(x => x.Points);
-        }
+            fixtures.ForEach(x => Predictions.Add(new MatchPlayerPredictionTP(x, this, rankController)));
 
-        private List<MatchPlayerPrediction> predictions;
-        public List<MatchPlayerPrediction> Predictions
-        {
-            get { return predictions; }
-            set { predictions = value; }
+            FuturePoints = Predictions.Sum(x => x.Points);
         }
 
         private List<MatchPlayerDetails> formFixtures;
@@ -95,7 +86,7 @@ namespace FantasyFootballTP.Ranking
             get { return formFixtures; }
             set { formFixtures = value; }
         }
-
+        
         private double homePointsSD;
         public double HomePointsSD
         {
@@ -109,17 +100,10 @@ namespace FantasyFootballTP.Ranking
             get { return awayPointsSD; }
             set { awayPointsSD = value; }
         }
-
-        private double futurePoints;
-        public double FuturePoints
-        {
-            get { return futurePoints; }
-            set { futurePoints = value; }
-        }
-
+        
         public double FuturePointsPerPound
         {
-            get { return FuturePoints / player.Price; }
+            get { return FuturePoints / Player.Price; }
         }
 
         private int homeMinutes;
@@ -179,30 +163,6 @@ namespace FantasyFootballTP.Ranking
         public double PointsPerGame
         {
             get { return homeMinutes + awayMinutes > 360 ? (((double)(homePoints + awayPoints) / (homeMinutes + awayMinutes)) * 90) + 2 : 0; }
-        }
-
-        private Player player;
-        public Player Player
-        {
-            get { return player; }
-            set { player = value; }
-        }
-
-        public double WillPlay { get; set; }
-
-        public int FormPoints(int weeks, int currentGameweek)
-        {
-            return Player.MatchPlayerDetails.Where(x => x.Match.GameWeek.No >= currentGameweek - weeks).Sum(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.TP).Value.ToString()));
-        }
-
-        public int HomeFormPoints(int weeks, int currentGameweek)
-        {
-            return Player.MatchPlayerDetails.Where(x => x.Match.GameWeek.No >= currentGameweek - weeks && x.Match.HomeTeam == Player.Team).Sum(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.TP).Value.ToString()));
-        }
-
-        public int AwayFormPoints(int weeks, int currentGameweek)
-        {
-            return Player.MatchPlayerDetails.Where(x => x.Match.GameWeek.No >= currentGameweek - weeks && x.Match.AwayTeam == Player.Team).Sum(x => int.Parse(x.MatchDetails.FirstOrDefault(w => w.Name == MatchDetailName.TP).Value.ToString()));
         }
     }
 }

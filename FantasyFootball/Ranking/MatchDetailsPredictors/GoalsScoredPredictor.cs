@@ -28,7 +28,7 @@ namespace FantasyFootball.Ranking.MatchDetailsPredictors
             var average = MatchPlayerPrediction.SDProportionate(TeamAverages, teamMatchDetailForms,
                                                                 playerMatchDetailForms, name);
 
-            if (playerRank.Player.IsGoalKeeper || playerRank.Player.IsDefensive)
+            if (playerRank.Player.IsGoalKeeper || playerRank.Player.IsDefender)
                 prediction = average * 6;
             else if (playerRank.Player.IsMidfield)
                 prediction = average * 5;

@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FantasyFootball.Model;
+using FantasyFootball.Model.Interfaces;
 using FantasyFootball.Ranking.MatchDetailsForm;
 
 namespace FantasyFootball.Ranking
 {
-    public class TeamRank
+    public class TeamRank : ITeamRank
     {
         public TeamRank(Team team)
         {
@@ -96,7 +97,7 @@ namespace FantasyFootball.Ranking
         {
             get { return awayMatchDetailForms; }
             set { awayMatchDetailForms = value; }
-        } 
+        }
 
         public double GKHomePoints { get; set; }
         public double DefHomePoints { get; set; }
@@ -123,7 +124,7 @@ namespace FantasyFootball.Ranking
             for (var i = 1; i <= (int)MatchDetailName.TP; i++)
             {
                 homeGKMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, homeDetails.Where(x => x.Player.IsGoalKeeper).SelectMany(x => x.MatchDetails)));
-                homeDefMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, homeDetails.Where(x => x.Player.IsDefensive).SelectMany(x => x.MatchDetails)));
+                homeDefMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, homeDetails.Where(x => x.Player.IsDefender).SelectMany(x => x.MatchDetails)));
                 homeMidMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, homeDetails.Where(x => x.Player.IsMidfield).SelectMany(x => x.MatchDetails)));
                 homeFwdMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, homeDetails.Where(x => x.Player.IsAttack).SelectMany(x => x.MatchDetails)));
                 homeMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, homeDetails.SelectMany(x => x.MatchDetails)));
@@ -132,7 +133,7 @@ namespace FantasyFootball.Ranking
             for (var i = 1; i <= (int)MatchDetailName.TP; i++)
             {
                 awayGKMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, awayDetails.Where(x => x.Player.IsGoalKeeper).SelectMany(x => x.MatchDetails)));
-                awayDefMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, awayDetails.Where(x => x.Player.IsDefensive).SelectMany(x => x.MatchDetails)));
+                awayDefMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, awayDetails.Where(x => x.Player.IsDefender).SelectMany(x => x.MatchDetails)));
                 awayMidMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, awayDetails.Where(x => x.Player.IsMidfield).SelectMany(x => x.MatchDetails)));
                 awayFwdMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, awayDetails.Where(x => x.Player.IsAttack).SelectMany(x => x.MatchDetails)));
                 awayMatchDetailForms.Add(new MatchDetailForm((MatchDetailName)i, awayDetails.SelectMany(x => x.MatchDetails)));

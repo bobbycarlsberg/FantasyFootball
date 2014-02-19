@@ -9,14 +9,12 @@ using FantasyFootball.Ranking.MatchDetailsPredictors;
 
 namespace FantasyFootball.Ranking
 {
-    public class PlayerRank
+    public class PlayerRank : PlayerRankBase
     {
-        public PlayerRank(Player player)
+        public PlayerRank(Player player):base(player)
         {
-            Player = player;
             awayMatchDetailForms = new List<MatchDetailForm>();
             homeMatchDetailForms = new List<MatchDetailForm>();
-            Predictions = new List<MatchPlayerPrediction>();
         }
 
         public void SetPoints(int gameWeek, int form, int futureGames)
@@ -25,11 +23,11 @@ namespace FantasyFootball.Ranking
 
             var awayGames =
                            Player.MatchPlayerDetails.Where(
-                               x => x.Match.GameWeek.No >= gameWeek - form && x.Match.AwayTeam == Player.Team).ToList();
+                               x => x.Match.GameWeek.No >= gameWeek - form && x.Match.GameWeek.No < gameWeek && x.Match.AwayTeam == Player.Team).ToList();
 
             var homeGames =
                 Player.MatchPlayerDetails.Where(
-                    x => x.Match.GameWeek.No >= gameWeek - form && x.Match.HomeTeam == Player.Team).ToList();
+                    x => x.Match.GameWeek.No >= gameWeek - form && x.Match.GameWeek.No < gameWeek && x.Match.HomeTeam == Player.Team).ToList();
 
             for (var i = 1; i <= (int)MatchDetailName.TP; i++)
             {
@@ -55,24 +53,24 @@ namespace FantasyFootball.Ranking
         public void Predict(int gameWeek, int futureGames, RankController rankController)
         {
             var fixtures =
-                player.Team.Fixtures.Where(x => x.GameWeek.No <= gameWeek + futureGames && x.GameWeek.No > gameWeek);
+                Player.Team.Fixtures.Where(x => x.GameWeek.No <= gameWeek + futureGames && x.GameWeek.No >= gameWeek).ToList();
 
-            Predictions =
-                fixtures.Select(x => new MatchPlayerPrediction(x, this, rankController)).ToList();
+            Predictions = new List<IMatchPlayerPrediction>();
 
-            if (predictions.Any())
-                FuturePoints = predictions.Sum(x => x.Prediction);
+            fixtures.ForEach(x => Predictions.Add(new MatchPlayerPrediction(x, this, rankController)));
+
+            if (Predictions.Any())
+                FuturePoints = Predictions.Sum(x => x.Points);
             else
             {
                 FuturePoints = 0;
             }
         }
 
-        private List<MatchPlayerPrediction> predictions;
-        public List<MatchPlayerPrediction> Predictions
+        public double ActualFuturePoints(int firstGameWeek, int lastGameWeek)
         {
-            get { return predictions; }
-            set { predictions = value; }
+            return Player.MatchPlayerDetails.Where(x => x.Match.GameWeek.No >= firstGameWeek
+                && x.Match.GameWeek.No <= lastGameWeek).Sum(x => x.TP);
         }
 
         private List<MatchDetailForm> awayMatchDetailForms;
@@ -88,15 +86,5 @@ namespace FantasyFootball.Ranking
             get { return homeMatchDetailForms; }
             set { homeMatchDetailForms = value; }
         }
-
-        private Player player;
-        public Player Player
-        {
-            get { return player; }
-            set { player = value; }
-        }
-
-        public double FuturePoints { get; set; }
-        public double WillPlay { get; set; }
     }
 }

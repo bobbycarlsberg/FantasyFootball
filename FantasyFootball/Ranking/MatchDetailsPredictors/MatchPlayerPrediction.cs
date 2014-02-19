@@ -9,11 +9,11 @@ using FantasyFootball.Ranking.MatchDetailsPredictors;
 
 namespace FantasyFootball.Model
 {
-    public class MatchPlayerPrediction
+    public class MatchPlayerPrediction : IMatchPlayerPrediction
     {
         public MatchPlayerPrediction(Fixture fixture, PlayerRank playerRank, RankController rankController)
         {
-            var teamRank = rankController.TeamRanks.FirstOrDefault(x => x.Team == (fixture.HomeTeam == playerRank.Player.Team ? fixture.AwayTeam : fixture.HomeTeam));
+            var teamRank = (TeamRank)rankController.TeamRanks.FirstOrDefault(x => x.Team == (fixture.HomeTeam == playerRank.Player.Team ? fixture.AwayTeam : fixture.HomeTeam));
             Fixture = fixture;
             Player = playerRank.Player;
 
@@ -34,7 +34,7 @@ namespace FantasyFootball.Model
             {
                 if (Player.IsGoalKeeper)
                     matchDetailPredictors.ForEach(x => x.SetPoints(rankController.AwayGKTeamAverages, teamRank, teamRank.AwayGKMatchDetailForms, playerRank, playerRank.HomeMatchDetailForms));
-                if (Player.IsDefensive)
+                if (Player.IsDefender)
                     matchDetailPredictors.ForEach(x => x.SetPoints(rankController.AwayDefTeamAverages, teamRank, teamRank.AwayDefMatchDetailForms, playerRank, playerRank.HomeMatchDetailForms));
                 if (Player.IsMidfield)
                     matchDetailPredictors.ForEach(x => x.SetPoints(rankController.AwayMidTeamAverages, teamRank, teamRank.AwayMidMatchDetailForms, playerRank, playerRank.HomeMatchDetailForms));
@@ -45,7 +45,7 @@ namespace FantasyFootball.Model
             {
                 if (Player.IsGoalKeeper)
                     matchDetailPredictors.ForEach(x => x.SetPoints(rankController.HomeGKTeamAverages, teamRank, teamRank.HomeGKMatchDetailForms, playerRank, playerRank.AwayMatchDetailForms));
-                if (Player.IsDefensive)
+                if (Player.IsDefender)
                     matchDetailPredictors.ForEach(x => x.SetPoints(rankController.HomeDefTeamAverages, teamRank, teamRank.HomeDefMatchDetailForms, playerRank, playerRank.AwayMatchDetailForms));
                 if (Player.IsMidfield)
                     matchDetailPredictors.ForEach(x => x.SetPoints(rankController.HomeMidTeamAverages, teamRank, teamRank.HomeMidMatchDetailForms, playerRank, playerRank.AwayMatchDetailForms));
@@ -53,9 +53,9 @@ namespace FantasyFootball.Model
                     matchDetailPredictors.ForEach(x => x.SetPoints(rankController.HomeFwdTeamAverages, teamRank, teamRank.HomeFwdMatchDetailForms, playerRank, playerRank.AwayMatchDetailForms));
             }
 
-            Prediction = matchDetailPredictors.Sum(x => x.Prediction);
-            if (Double.IsNaN(Prediction))
-                Prediction = 0;
+            Points = matchDetailPredictors.Sum(x => x.Prediction);
+            if (Double.IsNaN(Points))
+                Points = 0;
         }
 
         private List<IMatchDetailPredictor> matchDetailPredictors;
@@ -78,11 +78,11 @@ namespace FantasyFootball.Model
             set { player = value; }
         }
 
-        private double prediction;
-        public double Prediction
+        private double points;
+        public double Points
         {
-            get { return prediction; }
-            set { prediction = value; }
+            get { return points; }
+            set { points = value; }
         }
 
         public static double Average(List<MatchDetailForm> teamMatchDetailForms, List<MatchDetailForm> playerMatchDetailForms, MatchDetailName name)

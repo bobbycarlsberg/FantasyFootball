@@ -28,6 +28,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Scraper", "Scraper\", "{F18
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FantasyFootballTP", "FantasyFootballTP\FantasyFootballTP.csproj", "{82D7E2A5-47F6-4204-B71B-AA802546C59D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{1B0A7C87-EB6D-4525-AF6C-2B21F80427E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{82D7E2A5-47F6-4204-B71B-AA802546C59D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82D7E2A5-47F6-4204-B71B-AA802546C59D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82D7E2A5-47F6-4204-B71B-AA802546C59D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B0A7C87-EB6D-4525-AF6C-2B21F80427E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B0A7C87-EB6D-4525-AF6C-2B21F80427E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B0A7C87-EB6D-4525-AF6C-2B21F80427E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B0A7C87-EB6D-4525-AF6C-2B21F80427E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

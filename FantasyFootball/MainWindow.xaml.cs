@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FantasyFootball.Model;
 using FantasyFootball;
+using FantasyFootball.Model.Interfaces;
 using FantasyFootball.Ranking;
 using FantasyFootball.Ranking.MatchDetailsForm;
 
@@ -127,8 +128,8 @@ namespace FantasyFootball
             }
         }
 
-        private List<TeamRank> teamRanks;
-        public List<TeamRank> TeamRanks
+        private List<ITeamRank> teamRanks;
+        public List<ITeamRank> TeamRanks
         {
             get { return teamRanks; }
             set
@@ -155,8 +156,8 @@ namespace FantasyFootball
             }
         }
 
-        private List<PlayerRank> playerRanks;
-        public List<PlayerRank> PlayerRanks
+        private List<IPlayerRank> playerRanks;
+        public List<IPlayerRank> PlayerRanks
         {
             get { return playerRanks; }
             set
@@ -169,8 +170,8 @@ namespace FantasyFootball
             }
         }
 
-        private PlayerRank playerRank;
-        public PlayerRank PlayerRank
+        private IPlayerRank playerRank;
+        public IPlayerRank PlayerRank
         {
             get { return playerRank; }
             set
@@ -275,6 +276,96 @@ namespace FantasyFootball
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
             TeamAttributeComboBox.ItemsSource = Enum.GetValues(typeof (MatchDetailName)).Cast<MatchDetailName>();
+        }
+
+        private void MyTeam_OnClick(object sender, RoutedEventArgs e)
+        {
+            List<Player> team = new List<Player>();
+
+
+            team.Add(ModelController.Players.First(
+                x => x.IsGoalKeeper && x.Team.LongName == "Arsenal" && x.Name == "Szczesny"));
+            team.Add(ModelController.Players.First(
+                x => x.IsGoalKeeper && x.Team.LongName == "Crystal Palace" && x.Name == "Speroni"));
+
+
+            team.Add(ModelController.Players.First(
+                x => x.IsDefender && x.Team.LongName == "Southampton" && x.Name == "Shaw"));
+            team.Add(ModelController.Players.First(
+                x => x.IsDefender && x.Team.LongName == "Southampton" && x.Name == "Fonte"));
+            team.Add(ModelController.Players.First(
+                x => x.IsDefender && x.Team.LongName == "Sunderland" && x.Name == "Bardsley"));
+            team.Add(ModelController.Players.First(
+                x => x.IsDefender && x.Team.LongName == "Everton" && x.Name == "Coleman"));
+            team.Add(ModelController.Players.First(
+                x => x.IsDefender && x.Team.LongName == "Chelsea" && x.Name == "Cahill"));
+
+
+            team.Add(ModelController.Players.First(
+                x => x.IsMidfield && x.Team.LongName == "Cardiff City" && x.Name == "Mutch"));
+            team.Add(ModelController.Players.First(
+                x => x.IsMidfield && x.Team.LongName == "Everton" && x.Name == "Mirallas"));
+            team.Add(ModelController.Players.First(
+                x => x.IsMidfield && x.Team.LongName == "Sunderland" && x.Name == "Johnson"));
+            team.Add(ModelController.Players.First(
+                x => x.IsMidfield && x.Team.LongName == "Manchester City" && x.Name == "Yaya Touré"));
+            team.Add(ModelController.Players.First(
+                x => x.IsMidfield && x.Team.LongName == "Chelsea" && x.Name == "Hazard"));
+
+
+            team.Add(ModelController.Players.First(
+                x => x.IsAttack && x.Team.LongName == "Liverpool" && x.Name == "Suárez"));
+            team.Add(ModelController.Players.First(
+                x => x.IsAttack && x.Team.LongName == "Liverpool" && x.Name == "Sturridge"));
+            team.Add(ModelController.Players.First(
+                x => x.IsAttack && x.Team.LongName == "Southampton" && x.Name == "Rodriguez"));
+
+
+            
+
+            //team.Add(ModelController.Players.First(
+            //    x => x.IsGoalKeeper && x.Team.LongName == "Sunderland" && x.Name == "Mannone"));
+            //team.Add(ModelController.Players.First(
+            //    x => x.IsGoalKeeper && x.Team.LongName == "Southampton" && x.Name == "Kelvin Davis"));
+
+
+            //team.Add(ModelController.Players.First(
+            //    x => x.IsDefender && x.Team.LongName == "Everton" && x.Name == "Baines"));
+            //team.Add(ModelController.Players.First(
+            //    x => x.IsDefender && x.Team.LongName == "Norwich City" && x.Name == "Ryan Bennett"));
+            //team.Add(ModelController.Players.First(
+            //    x => x.IsDefender && x.Team.LongName == "Hull City" && x.Name == "Faye"));
+            //team.Add(ModelController.Players.First(
+            //    x => x.IsDefender && x.Team.LongName == "Everton" && x.Name == "Coleman"));
+            //team.Add(ModelController.Players.First(
+            //    x => x.IsDefender && x.Team.LongName == "Chelsea" && x.Name == "Cahill"));
+
+
+            //team.Add(ModelController.Players.First(
+            //    x => x.IsMidfield && x.Team.LongName == "Cardiff City" && x.Name == "Mutch"));
+            //team.Add(ModelController.Players.First(
+            //    x => x.IsMidfield && x.Team.LongName == "Southampton" && x.Name == "Lallana"));
+            //team.Add(ModelController.Players.First(
+            //    x => x.IsMidfield && x.Team.LongName == "Manchester City" && x.Name == "Silva"));
+            //team.Add(ModelController.Players.First(
+            //    x => x.IsMidfield && x.Team.LongName == "Manchester City" && x.Name == "Yaya Touré"));
+            //team.Add(ModelController.Players.First(
+            //    x => x.IsMidfield && x.Team.LongName == "Liverpool" && x.Name == "Ibe"));
+
+
+            //team.Add(ModelController.Players.First(
+            //    x => x.IsAttack && x.Team.LongName == "Liverpool" && x.Name == "Suárez"));
+            //team.Add(ModelController.Players.First(
+            //    x => x.IsAttack && x.Team.LongName == "Southampton" && x.Name == "Rodriguez"));
+            //team.Add(ModelController.Players.First(
+            //    x => x.IsAttack && x.Team.LongName == "Tottenham Hotspur" && x.Name == "Adebayor"));
+
+
+            rankController.RankPositions(ModelController.Players, formLength, currentGameWeek, FutureFixtures, "");
+
+            var ffteam = rankController.PickAndSuggest(team, formLength, currentGameWeek, 1.3);
+            Squad = ffteam;
+            PlayerRanks = Squad.Team;
         }
     }
 }

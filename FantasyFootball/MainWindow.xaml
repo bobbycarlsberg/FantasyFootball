@@ -36,6 +36,7 @@
             <Button x:Name="Price" Content="Get Players at price" Click="Price_OnClick"></Button>
             <Button x:Name="TeamOfWeek" Content="Team of week" Click="TeamOfWeek_OnClick"></Button>
             <TextBlock Text="{Binding Squad.Cost, StringFormat=N2, ElementName=DatagridWindow}"></TextBlock>
+            <Button x:Name="MyTeam" Content="My Team" Click="MyTeam_OnClick"></Button>
         </StackPanel>
 
         <Grid Grid.Row="1">
