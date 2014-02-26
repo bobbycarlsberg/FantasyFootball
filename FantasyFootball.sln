@@ -28,7 +28,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Scraper", "Scraper\", "{F18
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FantasyFootballTP", "FantasyFootballTP\FantasyFootballTP.csproj", "{82D7E2A5-47F6-4204-B71B-AA802546C59D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{1B0A7C87-EB6D-4525-AF6C-2B21F80427E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RankingComparer", "Tester\RankingComparer.csproj", "{1B0A7C87-EB6D-4525-AF6C-2B21F80427E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -74,6 +74,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Ranking\MatchDetailsForm\MatchDetailForm.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\AssistPredictor.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\BonusPredictor.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\CleanSheetPredictor.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\GoalsConcededPredictor.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\GoalsScoredPredictor.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\IMatchDetailsPredictor.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\MatchPlayerPrediction.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\MinutesPlayedPredictor.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\OwnGoalPredictor.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\RedCardPredictor.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\SavesPredictor.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\TotalPointsPredictor.cs" />
+    <Compile Include="Ranking\MatchDetailsPredictors\YellowCardPredictor.cs" />
     <Compile Include="Ranking\MatchPlayerPredictionTP.cs" />
     <Compile Include="Ranking\PlayerRankTP.cs" />
     <Compile Include="Ranking\RankControllerTP.cs" />

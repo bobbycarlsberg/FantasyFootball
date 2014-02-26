@@ -22,3 +22,6 @@ C:\Users\nicholas\Documents\GitHub\FantasyFootball\Tester\bin\Debug\LinqToExcel.
 C:\Users\nicholas\Documents\GitHub\FantasyFootball\Tester\obj\Debug\Tester.exe
 C:\Users\nicholas\Documents\GitHub\FantasyFootball\Tester\obj\Debug\Tester.pdb
 C:\Users\nicholas\Documents\GitHub\FantasyFootball\Tester\bin\Debug\FantasyFootballTP.pdb
+C:\FantasyFootball\Tester\bin\Debug\Tester.exe.config
+C:\FantasyFootball\Tester\obj\Debug\Tester.exe
+C:\FantasyFootball\Tester\obj\Debug\Tester.pdb

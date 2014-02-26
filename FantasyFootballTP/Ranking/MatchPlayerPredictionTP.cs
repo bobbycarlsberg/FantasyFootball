@@ -15,7 +15,7 @@ namespace FantasyFootballTP.Ranking
             Fixture = fixture;
             Player = playerRank.Player;
 
-            var teamRank = rankController.TeamRanks.FirstOrDefault(x => x.Team == (fixture.HomeTeam == player.Team ? fixture.AwayTeam : fixture.HomeTeam));
+            var teamRank = rankController.TeamRanks.First(x => x.Team == (fixture.HomeTeam == player.Team ? fixture.AwayTeam : fixture.HomeTeam));
             if (playerRank.WillPlay > 0.35)
             {
                 if (fixture.AwayTeam == teamRank.Team)
